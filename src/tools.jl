@@ -12,7 +12,7 @@ camel_case
 function uncamel(s)
     final = ""
     for item in s
-        if isupper(item)
+        if item == uppercase(item)
             final *= ("_" * string(lowercase(item)))
         else
             final *= string(item)
@@ -68,8 +68,8 @@ time_period
 """
 function fix_varname(s)
     s = lowercase(s)
-    s = replace(s, " ", "_")
-    s = replace(s, "-", "_")
+    s = replace(s, " " => "_")
+    s = replace(s, "-" => "_")
     s
 end
 

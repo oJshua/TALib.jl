@@ -1,4 +1,4 @@
-include("src/TALib.jl")
+#include("src/TALib.jl")
 
 using TALib
 using TALib: TA_MAType_SMA

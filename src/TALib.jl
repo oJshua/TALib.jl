@@ -21,9 +21,7 @@ export FunctionDescriptionXML
 include("tools.jl")
 
 function _ta_check_success(function_name::String, ret_code::TA_RetCode)
-    errorCode = TA_RetCode(ret_code)
-
-    if errorCode == TA_SUCCESS::TA_RetCode
+    if isequal(TA_SUCCESS::TA_RetCode, ret_code)
         return true
     else
         error("$function_name function failed with error code $errorCode")
@@ -65,9 +63,9 @@ end
 
 # ===
 
-code_generators = ["ta_func_api_code_level0", 
-    "ta_func_api_code_level1", 
-    "ta_func_api_code_level2_dataframes", 
+code_generators = ["ta_func_api_code_level0",
+    "ta_func_api_code_level1",
+    "ta_func_api_code_level2_dataframes",
     "ta_func_api_code_level2_timearrays"]
 
 import_generated = true
@@ -75,7 +73,7 @@ for code_generator in code_generators
     filename = joinpath(basepath(), "generated", code_generator * ".jl")
     if !isfile(filename)
         import_generated = false
-        warn("code generation is required for $filename")
+        @warn("code generation is required for $filename")
         break
     end
 end
@@ -89,8 +87,8 @@ for code_generator in code_generators
     try
         #info("include $filename")
         include(filename)
-    catch
-        error("$filename doesn't exist")
+    catch e
+        error(e)
     end
 end
 
@@ -106,4 +104,3 @@ export D_INDICATORS, INDICATORS, D_GROUPS
 
 
 end # module
-

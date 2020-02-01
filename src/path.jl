@@ -5,7 +5,7 @@ Returns base path as String
 """
 function basepath()
     path = Base.source_dir()
-    if typeof(path) == Void
+    if typeof(path) == Nothing
         path = ""
     else
         path

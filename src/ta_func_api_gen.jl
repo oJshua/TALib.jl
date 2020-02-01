@@ -1,3 +1,20 @@
+pkg_name = "TALib"
+depsjl = joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")
+println(depsjl)
+if isfile(depsjl)
+    include(depsjl)
+else
+    error("$pkg_name not properly installed. Please run Pkg.build(\"$pkg_name\")")
+end
+
+include("constants.jl")
+include("path.jl")
+
+include("describe.jl")
+include("tools.jl")
+
+D_INDICATORS, INDICATORS, D_GROUPS = get_ta_func_constants()
+
 for filename in ["ta_func_api_gen_level0.jl", "ta_func_api_gen_level1.jl",
         "ta_func_api_gen_level2_dataframe.jl", "ta_func_api_gen_level2_timearray.jl"]
     include(filename)

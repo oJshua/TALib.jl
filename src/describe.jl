@@ -14,7 +14,7 @@ function _list2ordereddict(lst_ta_func)
         l = []  # length of RequiredInputArguments, OptionalInputArguments, OutputArguments
         for key in ["RequiredInputArgument", "OptionalInputArgument", "OutputArgument"]
             if haskey(func_info, key * "s")
-                if typeof(func_info[key * "s"][key]) <: Associative  # if it's a dict like
+                if typeof(func_info[key * "s"][key]) <: AbstractDict  # if it's a dict like
                     func_info[key * "s"] = [func_info[key * "s"][key]]  # list of only ONE element
                 else
                     func_info[key * "s"] = func_info[key * "s"][key]
